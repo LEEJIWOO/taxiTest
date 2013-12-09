@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>같이타자</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript">
+// var myScroll;
+// function loaded() {
+// 	myScroll = new iScroll('wrapper');
+// }
+
+// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+// document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+</script>
+<!-- JQuery -->
+<link rel="stylesheet" href="../css/jquery.mobile-1.3.2.css">
+<!-- JQueryMobile DataBox -->
+<link href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" rel="stylesheet" />
+<!-- Theme -->
+<link rel="stylesheet" href="../css/themes/taxi.css"/>
+<!-- Added -->
+<link rel="stylesheet" href="room.css">
+
+<!-- JQuery -->
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/jquery.mobile-1.3.2.js"></script>
+<!-- JQueryMobile DataBox -->
+<script src="http://dev.jtsage.com/jquery.mousewheel.min.js"></script>
+<script src="../js/jquery.mobile.datebox.js"></script>
+<!-- Olleh Map -->
+<script src="http://map.ktgis.com/MapAPI/serviceJSP/AuthAPI.jsp?key=MXBmMnRvUnhPOVdCMEtMdjdYaHdTOFdKREg2SW9nNkhKQXBXVXpab0Ezd1J4UWVlT3M6QmJxR0h4Y2JnYmdaRGUxcDR1djdqYU5oMlhEbFZGWnpNOUlRZzZwckdyNTdxS3A4MHo=&module=Map,Geocoder,Directions"></script>
+<!-- iscroll 관련 js  -->
+<script src="../js/iscroll.js"></script>
+<!-- Added -->
+<script src="room.js"></script>
+
+</head>
+
+<body>
+<div id="roomPage" data-role="page" data-theme="d" data-iscroll="enable">
+	<!-- header -->
+
+	<div id="mainHeader" data-role="header" data-theme="d" data-position="fixed" data-tap-toggle="false">
+		<img id="icons" class="ui-btn-left"  data-corners="false" data-theme="none" data-role="button"  src="../images/photo/taxi.png"/>
+		<span id="roomInfo">방 정보</span>
+    <a href="#popupLogin"  class="ui-btn-right" data-rel="popup"
+    	data-position-to="window" data-role="button" data-inline="true" data-icon="check"
+    	data-theme="d" data-transition="pop">나가기</a>
+	<div data-role="popup" id="popupLogin" data-theme="d" class="ui-corner-all">
+		<div data-role="header" data-theme="d" class="ui-corner-top">
+	        <h1 style="color:black;">방 나가기</h1>
+	    </div>
+		<div style="padding:10px 20px;">
+			<h3>정말 나가시겠습니까?</h3>
+			<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="c">취소</a>
+			<a href="#" id="outRoom" data-role="button" data-inline="true" data-rel="back" data-theme="d">나가기</a>
+		</div>
+	</div>
+
+		<section id="roomSubHeader">
+			<ul id="roomHeaderUl" data-role="listview" data-inset="true" data-corners="false">
+			    <li style="height: 50px; padding: 0;">
+					<span id="roomStartTime"></span>
+					<span id="roomStartDay"></span>
+					<span id="addedFare">  </span>
+					<span id="fareName">예상요금</span>
+					<span id="myFare"></span>
+					<span id="roomFare"></span>
+					<span hidden="ture" id="roomNo"></span>
+				</li>
+			</ul>
+		</section>
+	</div>
+
+
+	<!-- content -->
+<!-- <section id="content" data-role="content" class="ui-content" data-theme="d" data-iscroll="enable"> -->
+	<div id="divMapWrap">
+		<div id="canvas_map">
+
+		</div>
+		<a href="#popupRelation" id="relationView" class="" data-mini="true" data-rel="popup" data-corners="false"
+    	data-position-to="window" data-role="button" data-inline="true" data-icon="grid"
+    	data-theme="d" data-transition="pop">관계도</a>
+		<span id="roomDistance"></span>
+		<div data-role="popup" id="popupRelation" data-theme="d" class="ui-corner-all">
+		<div data-role="header" data-theme="d" class="ui-corner-top">
+	        <h1 style="color:black;">관계도</h1>
+	    </div>
+		<div>
+			<img hidden="true" id="back" src="../images/common/backg.jpg">
+			<canvas id="myCanvas" width="320" height="320"></canvas>
+		</div>
+	</div>
+	</div>
+
+
+<div id="commentList">
+<section>
+<ul data-role="listview" data-theme="c" data-inset="true" data-corners="false" id="aaa">
+    <li data-inset="true">
+    <img id="imgMbrPhoto" style="width:77px;" src="">
+       <span id="mbrName"></span>
+	 <input type="text" data-theme="c" id="reply" placeholder="한줄 댓글 달기" value="" data-mini="true">
+	</li>
+</ul>
+</section>
+
+<section id="feedView">
+<div id="wrapper"data-iscroll="enable">
+	<div id="scroller">
+<ul id="thelist" data-iscroll="enable" class="listViewUl" data-role="listview" data-inset="true" data-corners="false">
+</ul>
+
+			</div>
+		</div>
+		</section>
+		</div>
+<!-- </section> -->
+</div> <!-- end page -->
+</body>
+</html>
+
+

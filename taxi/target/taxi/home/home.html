@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>같이타자</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- JQuery -->
+<link rel="stylesheet" href="../css/jquery.mobile-1.3.2.css">
+<!-- JQueryMobile DataBox -->
+<link rel="stylesheet" href="../css/jqm-datebox.css"  />
+<!-- Theme -->
+<link rel="stylesheet" href="../css/themes/taxi.css" />
+<!-- Added -->
+<link rel="stylesheet" href="home.css">
+
+<!-- JQuery -->
+<script src="../js/jquery-1.10.2.js"></script>
+<script>
+$(document).on("mobileinit", function() {
+	$.mobile.ignoreContentEnabled = true;
+});
+</script>
+<script src="../js/jquery.transit.js"></script>
+<script src="../js/jquery.mobile-1.3.2.js"></script>
+<!-- JQueryMobile DataBox -->
+<script src="../js/jquery.mousewheel.min.js"></script>
+<script src="../js/jqm-datebox.core.js"></script>
+<script src="../js/jqm-datebox.mode.flipbox.js"></script>
+<script src="../js/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
+<!-- Olleh Map -->
+<script src="http://map.ktgis.com/MapAPI/serviceJSP/AuthAPI.jsp?key=MXBmMnRvUnhPOVdCMEtMdjdYaHdTOFdKREg2SW9nNkhKQXBXVXpab0Ezd1J4UWVlT3M6QmJxR0h4Y2JnYmdaRGUxcDR1djdqYU5oMlhEbFZGWnpNOUlRZzZwckdyNTdxS3A4MHo=&module=Map,Geocoder,Directions"></script>
+<!-- iscroll 관련 js  -->
+<script src="../js/iscroll.js"></script>
+<!-- Added -->
+<script src="../js/common.js"></script>
+<script src="home.js"></script>
+
+</head>
+
+<body>
+<div id="pageHome" data-role="page" data-title="홈" data-theme="d">
+
+	<!-- content -->
+	<section id="contentHome" data-role="content" data-theme="d">
+	
+		<!-- 출발지/목적지 -->
+		<div id="divStartEndLoc"  data-enhance="false">
+			<div class = "divLocationInput" data-enhance="false">
+				<a class="aCurrentLocAndFavoriteIcon" id="btnCurrentLoc" href="#">
+					<img class="imgCurrentLocAndFavoriteIcon" src="../images/common/currentLocation-icon.png" >
+				</a>
+				<a class="aSearchClear" id="aStartSearchClear">
+					<img class = "cancleIcon" src="../images/common/cancle-icon.png" >
+				</a>
+				<input type='text' id="startInput" class="searchInput" placeholder="출발" value="">
+			</div>
+ 		
+ 			<div class = "divLocationInput" data-enhance="false">
+				<a class="aCurrentLocAndFavoriteIcon" id="btnFavoriteLoc" href="#">
+					<img class="imgCurrentLocAndFavoriteIcon" src="../images/common/favorite-icon.png" >
+				</a> 			
+				<a class="aSearchClear" id="aEndSearchClear">
+					<img class = "cancleIcon" src="../images/common/cancle-icon.png" >
+				</a>
+				<input type='text' id="endInput" class="searchInput" placeholder="도착" value="">
+			</div>			
+		</div>
+
+
+		<!-- 맵 -->
+		<div id="divMapWrap">
+			<!-- map -->
+			<div id="canvas_map"></div>
+		</div><!-- //divMapWrap -->
+		
+		<!-- 등록/보기 버튼 -->
+		<a id="btnAddViewRoom" data-enhance="false">
+			<img src="../images/common/monotone_plus_add_round.png">
+			<span>경로등록</span>
+		</a>
+		
+		<!-- 방목록 -->
+		<div id="wrapper">
+			<div id="scroller">
+				<ul id="ulRoomList" data-role="none" data-enhance="false"></ul>
+			</div>
+		</div>
+		
+	</section>
+	
+
+	<!-- 방등록 팝업 -->
+	<div id="divAddRoomCondition_popup" data-role="popup" data-corners="false" 
+		data-overlay-theme="a" data-theme="c" class="ui-corner-all">
+		<header data-role="header" data-theme="a">
+	        <h1>방 등록</h1>
+	    </header>
+	    <section data-role="content" class="ui-corner-bottom ui-content" data-theme="c">
+			<fieldset id="radioDaySelect" data-role="controlgroup" data-type="horizontal" data-mini="true" data-corners="false">
+				<legend>출발시간</legend>
+				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="today" checked="checked">
+				<label for="radio-choice-h-2a">오늘</label>
+				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="tomorrow">
+				<label for="radio-choice-h-2b">내일</label>
+			</fieldset>	    
+			<input type="date" id="setTimeBox" name="themes" data-role="datebox" data-theme="b"
+					data-options='{"mode": "timeflipbox", "useSetButton":false, "useInline":true,
+					"useImmediate":true, "themeDate" : "d","themeHeader" : "f" }'/>
+			<a class="btnAddRoomUI" href="#" data-role="button" data-inline="true" data-mini="true" 
+			  	data-corners="false" data-icon="delete">취소</a>					
+			<a class="btnAddRoomUI" href="#" data-role="button" data-inline="true" data-mini="true" 
+			  	data-corners="false" data-icon="check">등록</a>
+	    </section>
+	</div>		
+
+	<!-- 즐겨찾기 -->
+	<div id="divFavoriteLoc_popup" data-role="popup" data-theme="d" data-dismissible="true"  
+			data-inset="true" data-overlay-theme="a" data-corners="false">
+		<ul id="favoriteUl" data-role="listview" data-inset="true"  data-theme="d"  data-corners="false">
+			<li id="favoriteHeader" class="title_li"  data-role="list-divider" data-theme="c">자주가는 목적지</li>
+		</ul>	
+	</div>
+	
+	
+</div><!-- //page -->
+</body>
+</html>	

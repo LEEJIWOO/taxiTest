@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.bitacademy.java41.oldboy.dao.FeedDao">
+
+	<select id="getFeedList"
+		parameterType="int" 
+		resultType="Feed">
+				select  a.FEED_NO 			as feedNo
+					,	a.FEED_CONTENT 		as feedContent
+					,	a.MBR_ID 			as mbrId
+					,	a.FEED_REG_DATE 	as feedRegDate
+					,	a.ROOM_NO			as feedRoomNo
+					,	c.mbr_name			as mbrName
+					,	c.mbr_photo_url		as mbrPhotoUrl
+				from 	FEED a
+					, 	ROOM_MBR b
+					,	MBR c
+			   where 	1 = 1
+			   	and 	a.ROOM_NO = b.ROOM_NO
+			   	and 	a.MBR_ID = b.MBR_ID
+			   	and 	b.MBR_ID = c.MBR_ID
+			   	and 	a.ROOM_NO = #{value}
+			   order by FEED_REG_DATE desc
+	</select> 
+		
+ 	<insert id="addFeed" 
+      	parameterType="Feed"
+      	useGeneratedKeys="true"
+      	keyProperty="feedNo"
+      	keyColumn="FEED_NO">
+      	
+			 insert into FEED 
+				 			 (
+						  	 FEED_CONTENT 
+						  ,	 MBR_ID
+						  ,	 FEED_REG_DATE
+						  ,	 ROOM_NO
+							 )
+				  VALUES
+						(
+					 	#{feedContent} 
+					 ,	#{mbrId} 
+					 ,	now() 
+					 ,	#{feedRoomNo} 
+						)
+	
+		<selectKey keyProperty ="feedNo" 
+		    	   resultType ="java.lang.Integer"
+		    	   order="BEFORE"
+		    	   databaseId="FEED_NO">
+		    SELECT_LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+		
+	 	
+ 	<delete id="deleteFeed" parameterType="map">
+		delete from FEED 
+		<where>
+			<trim prefixOverrides="AND|OR">
+				
+				<if test="mbrId != null">
+					MBR_ID = #{mbrId} 
+				</if>
+				
+				<if test="feedNo != 0">
+					and FEED_NO = #{feedNo}
+				</if>
+				
+			</trim>
+		</where> 
+	</delete> 
+</mapper> 
+
+
+
+
+
+
+
+
+
+
+
+
+

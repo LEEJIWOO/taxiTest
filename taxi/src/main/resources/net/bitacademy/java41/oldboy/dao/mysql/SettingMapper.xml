@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.oldboy.dao.SettingDao">
+    
+    <insert id="addSetting" parameterType="Setting">
+        INSERT INTO SETTING ( mbr_id, start_range, end_range )
+        values ( #{mbrId}, #{startRange}, #{endRange} )
+    </insert>
+    
+    
+    <delete id="deleteSetting" parameterType="String"> 
+        delete from SETTING  
+        where MBR_ID=#{value}  
+    </delete> 
+    
+    
+    <select id="getRange" parameterType="String" resultType="Setting">
+        select 
+   			 	MBR_ID as mbrId 
+   			 ,  START_RANGE as startRange
+   			 ,  END_RANGE as endRange
+   		
+		from  SETTING           
+		where MBR_ID = #{value};
+    </select>
+    
+    
+	<update id="updateRange" parameterType="Setting">
+        update SETTING
+		<set>
+			<if test="startRange != null">START_RANGE=#{startRange},</if>
+	 		<if test="endRange != null">END_RANGE=#{endRange},</if>
+		</set>
+		where MBR_ID= #{mbrId}
+        
+    </update>
+	
+</mapper>
+
+

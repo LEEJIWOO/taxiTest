@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>같이타자</title>
+
+<!-- JQuery -->
+<link rel="stylesheet" href="../css/jquery.mobile-1.3.2.css">
+<!-- Theme -->
+<link rel="stylesheet" href="../css/themes/taxi.css" />
+<!-- Added -->
+<link rel="stylesheet" href="auth.css">
+
+<!-- JQuery -->
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/jquery.mobile-1.3.2.js"></script>
+<!-- Olleh Map -->
+<script src="http://map.ktgis.com/MapAPI/serviceJSP/AuthAPI.jsp?key=ODEwMEQ4QzA6VEJGRkMwMzQzOUQ4NA==&module=Map,Geocoder,Directions"></script>
+<!-- Added -->
+<script src="auth.js"></script>
+</head>
+
+<body>
+<div id="fb-root"></div>
+<!-- 로딩화면 -->
+<div id="divLoadingPage" data-role="page">
+		<img id = "loadIco" src="../images/common/loadTaxi.png" align="middle" />
+</div>
+
+
+<!-- 로그인 화면 -->
+<div id="divLoginPage" data-role="page" data-theme="f">
+	<section  id="login" class="mainIco" data-role="content" data-theme="f">
+		<img src="../images/common/taxi.png" align="middle" width="200" /><br>
+		<span id="loadFont">택시타자</span><br>
+	</section>
+			<fb:login-button id="btnLoginFB" size="xlarge" 
+		                 onlogin="require('./log').info('onlogin callback')">
+		  Login with Facebook
+			</fb:login-button><br>
+</div>
+
+
+<!-- 휴대폰수집 화면 -->
+<div id="divPhonePage" data-role="page" data-theme="f">
+	<header data-role="header" data-theme="f">
+		<img id="icons" src="../images/photo/taxi.png"/> <span id="result"><strong>전화번호 입력</strong></span>
+	</header>
+	
+	<section id="content" data-role="content" data-theme="f">
+		<strong id="enter">핸드폰 번호를 입력해주세요.</strong>
+		<div id="line" data-theme="f" class="ui-li ui-li-static ui-btn-up-f" readonly="readonly">
+		(+82)Republic of Korea</div>
+		
+		<input id="txtPhone" name="phoneNo" type="text" data-theme="b" placeholder="휴대폰 번호 입력(010-1234-1234)"><span id="spnPhoneStatus"></span>
+		<section id="next" style="display:none;">
+		<button  data-theme="b" id="btnPhoneNo" data-role="button">다음</button>
+		</section>
+		<div id="info">
+			Texi 같이 타자는 전화번호의 본인사용 및 부정사용방지를 위하여 인증을 필요로 합니다.
+		</div>
+	</section>
+</div>
+</body>
+</html>

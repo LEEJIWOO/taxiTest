@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.oldboy.dao.FrndDao">
+	
+	<insert id="addFrndList" parameterType="java.util.List">
+		insert into	FRND ( MBR_ID, FRND_ID, FRND_NAME, FRND_PHOTO_URL ) values
+		<foreach collection="list" item="frnd" separator=",">
+		( #{frnd.mbrId},#{frnd.frndId},#{frnd.frndName},#{frnd.frndPhotoUrl} )
+		</foreach>
+	</insert>
+	
+	
+	<delete id="deleteFrnd" parameterType="String"> 
+        delete from FRND  
+        where MBR_ID=#{value}  
+    </delete> 
+
+</mapper>
+
+

@@ -1,0 +1,460 @@
+set SQL_SAFE_UPDATES = 0;
+
+/* 테스트데이터터 */
+-- 조회
+select * from mbr where mbr_name like '회원%';
+select * from setting where mbr_id in (select mbr_id from mbr where mbr_name like '회원%');
+select * from frnd where frnd_name like '회원%' or frnd_name like '친구%';
+select * from room;
+select * from room_path;
+select * from room_mbr;
+select * from feed;
+select * from fvrt_loc where mbr_id = '10000001';
+
+
+-- 삭제
+delete from fvrt_loc where mbr_id = '10000001';
+delete from feed;
+delete from room_mbr;
+delete from room_path;
+delete from room;
+delete from frnd where frnd_name like '회원%' or frnd_name like '친구%';
+delete from setting where mbr_id in (select mbr_id from mbr where mbr_name like '회원%');
+delete from mbr where mbr_name like '회원%';
+
+
+/* 회원정보(MBR) */
+insert into mbr(mbr_id, mbr_name, mbr_phone_no, mbr_photo_url, mbr_gender, mbr_reg_date)
+values 
+( 10000001, '회원01', '010-1111-0001', '../images/photo/m01.jpg', 'male'   , now() ),
+( 10000002, '회원02', '010-1111-0002', '../images/photo/m02.jpg', 'female' , now() ),
+( 10000003, '회원03', '010-1111-0003', '../images/photo/m03.jpg', 'male'   , now() ),
+( 10000004, '회원04', '010-1111-0004', '../images/photo/m04.jpg', 'female' , now() ),
+( 10000005, '회원05', '010-1111-0005', '../images/photo/m05.jpg', 'male'   , now() ),
+( 10000006, '회원06', '010-1111-0006', '../images/photo/m06.jpg', 'female' , now() ),
+( 10000007, '회원07', '010-1111-0007', '../images/photo/m07.jpg', 'male'   , now() ),
+( 10000008, '회원08', '010-1111-0008', '../images/photo/m08.jpg', 'female' , now() ),
+( 10000009, '회원09', '010-1111-0009', '../images/photo/m09.jpg', 'male'   , now() ),
+( 10000010, '회원10', '010-1111-0010', '../images/photo/m10.jpg', 'female' , now() ),
+( 10000011, '회원11', '010-1111-0011', '../images/photo/m11.jpg', 'male'   , now() ),
+( 10000012, '회원12', '010-1111-0012', '../images/photo/m12.jpg', 'female' , now() ),
+( 10000013, '회원13', '010-1111-0013', '../images/photo/m13.jpg', 'male'   , now() ),
+( 10000014, '회원14', '010-1111-0014', '../images/photo/m14.jpg', 'female' , now() ),
+( 10000015, '회원15', '010-1111-0015', '../images/photo/m15.jpg', 'male'   , now() ),
+( 10000016, '회원16', '010-1111-0016', '../images/photo/m16.jpg', 'female' , now() ),
+( 10000017, '회원17', '010-1111-0017', '../images/photo/m17.jpg', 'male'   , now() ),
+( 10000018, '회원18', '010-1111-0018', '../images/photo/m18.jpg', 'female' , now() ),
+( 10000019, '회원19', '010-1111-0019', '../images/photo/m19.jpg', 'male'   , now() ),
+( 10000020, '회원20', '010-1111-0020', '../images/photo/m20.jpg', 'female' , now() ),
+( 10000021, '회원21', '010-1111-0021', '../images/photo/m21.jpg', 'male'   , now() ),
+( 10000022, '회원22', '010-1111-0022', '../images/photo/m22.jpg', 'female' , now() ),
+( 10000023, '회원23', '010-1111-0023', '../images/photo/m23.jpg', 'male'   , now() ),
+( 10000024, '회원24', '010-1111-0024', '../images/photo/m24.jpg', 'female' , now() ),
+( 10000025, '회원25', '010-1111-0025', '../images/photo/m25.jpg', 'male'   , now() ),
+( 10000026, '회원26', '010-1111-0026', '../images/photo/m26.jpg', 'male'   , now() ),
+( 10000027, '회원27', '010-1111-0027', '../images/photo/m27.jpg', 'female' , now() ),
+( 10000028, '회원28', '010-1111-0028', '../images/photo/m28.jpg', 'male'   , now() ),
+( 10000029, '회원29', '010-1111-0029', '../images/photo/m29.jpg', 'female' , now() ),
+( 10000030, '회원30', '010-1111-0030', '../images/photo/m30.jpg', 'female' , now() ),
+( 10000031, '회원31', '010-1111-0031', '../images/photo/m31.jpg', 'male'   , now() ),
+( 10000032, '회원32', '010-1111-0032', '../images/photo/m32.jpg', 'female' , now() ),
+( 10000033, '회원33', '010-1111-0033', '../images/photo/m33.jpg', 'female' , now() );
+
+/* 설정정보(SETTING) */
+insert into setting(mbr_id, start_range, end_range)
+values 
+('10000001',  900, 1000),
+('10000002', 1000, 1000),
+('10000003', 1000, 1000),
+('10000004', 1000, 1000),
+('10000005', 1000, 1000),
+('10000006', 1000, 1000),
+('10000007', 1000, 1000),
+('10000008', 1000, 1000),
+('10000009', 1000, 1000),
+('10000010', 1000, 1000),
+('10000011', 1000, 1000),
+('10000012', 1000, 1000),
+('10000013', 1000, 1000),
+('10000014', 1000, 1000),
+('10000015', 1000, 1000),
+('10000016', 1000, 1000),
+('10000017', 1000, 1000),
+('10000018', 1000, 1000),
+('10000019', 1000, 1000),
+('10000020', 1000, 1000),
+('10000021', 1000, 1000),
+('10000022', 1000, 1000),
+('10000023', 1000, 1000),
+('10000024', 1000, 1000),
+('10000025', 1000, 1000),
+('10000026', 1000, 1000),
+('10000027', 1000, 1000),
+('10000028', 1000, 1000),
+('10000029', 1000, 1000),
+('10000030', 1000, 1000),
+('10000031', 1000, 1000),
+('10000032', 1000, 1000);
+('10000033', 1000, 1000);
+
+
+/* 친구정보(FRND) */
+insert into frnd(mbr_id, frnd_id, frnd_name, frnd_photo_url)
+values 
+-- 회원01
+( 10000001, 10000002, '회원02', '../images/photo/m02.jpg' ),
+( 10000001, 10000005, '회원05', '../images/photo/m05.jpg' ),
+( 10000001, 10000008, '회원08', '../images/photo/m08.jpg' ),
+( 10000001, 10000011, '회원11', '../images/photo/m11.jpg' ),
+( 10000001, 20000005, '친구05', '../images/photo/f05.jpg' ),
+( 10000001, 20000006, '친구06', '../images/photo/f06.jpg' ),
+( 10000001, 20000008, '친구08', '../images/photo/f08.jpg' ),
+( 10000001, 20000010, '친구10', '../images/photo/f10.jpg' ),
+( 10000001, 10000026, '회원26', '../images/photo/m26.jpg' ),
+( 10000001, 10000032, '회원32', '../images/photo/m32.jpg' ),
+( 10000001, 10000033, '회원33', '../images/photo/m33.jpg' ),
+-- 회원02
+( 10000002, 10000001, '회원01', '../images/photo/m01.jpg' ),
+( 10000002, 10000003, '회원03', '../images/photo/m03.jpg' ),
+-- 회원03
+( 10000003, 10000002, '회원02', '../images/photo/m02.jpg' ),
+( 10000003, 10000004, '회원04', '../images/photo/m04.jpg' ),
+-- 회원04
+( 10000004, 10000003, '회원03', '../images/photo/m03.jpg' ),
+-- 회원05
+( 10000005, 10000001, '회원01', '../images/photo/m01.jpg' ),
+( 10000005, 20000001, '친구01', '../images/photo/f01.jpg' ),
+-- 회원06
+( 10000006, 10000007, '회원07', '../images/photo/m07.jpg' ),
+( 10000006, 20000001, '친구01', '../images/photo/f01.jpg' ),
+-- 회원07
+( 10000007, 10000006, '회원06', '../images/photo/m06.jpg' ),
+-- 회원08
+( 10000008, 10000001, '회원01', '../images/photo/m01.jpg' ),
+( 10000008, 20000001, '친구01', '../images/photo/f01.jpg' ),
+-- 회원09
+( 10000009, 10000008, '회원08', '../images/photo/m08.jpg' ),
+( 10000009, 20000002, '친구02', '../images/photo/f02.jpg' ),
+-- 회원10
+( 10000010, 20000002, '친구02', '../images/photo/f02.jpg' ),
+-- 회원11
+( 10000011, 10000001, '회원01', '../images/photo/m01.jpg' ),
+( 10000011, 20000003, '친구03', '../images/photo/f03.jpg' ),
+-- 회원12
+( 10000012, 20000003, '친구03', '../images/photo/f03.jpg' ),
+( 10000012, 20000004, '친구04', '../images/photo/f04.jpg' ),
+-- 회원13
+( 10000013, 20000004, '친구04', '../images/photo/f04.jpg' ),
+-- 회원14
+( 10000014, 20000005, '친구05', '../images/photo/f05.jpg' ),
+( 10000014, 10000015, '회원15', '../images/photo/m15.jpg' ),
+-- 회원15
+( 10000015, 10000014, '회원14', '../images/photo/m14.jpg' ),
+( 10000015, 10000016, '회원16', '../images/photo/m16.jpg' ),
+-- 회원16
+( 10000016, 10000015, '회원15', '../images/photo/m15.jpg' ),
+-- 회원17
+( 10000017, 20000006, '친구06', '../images/photo/f06.jpg' ),
+( 10000017, 20000007, '친구07', '../images/photo/f07.jpg' ),
+-- 회원18
+( 10000018, 20000007, '친구07', '../images/photo/f07.jpg' ),
+( 10000018, 10000019, '회원19', '../images/photo/m19.jpg' ),
+-- 회원19
+( 10000019, 10000018, '회원18', '../images/photo/m18.jpg' ),
+-- 회원20
+( 10000020, 20000008, '친구08', '../images/photo/f08.jpg' ),
+( 10000020, 10000021, '회원21', '../images/photo/m21.jpg' ),
+-- 회원21
+( 10000021, 10000020, '회원20', '../images/photo/m20.jpg' ),
+( 10000021, 20000009, '친구09', '../images/photo/f09.jpg' ),
+-- 회원22
+( 10000022, 20000009, '친구09', '../images/photo/f09.jpg' ),
+-- 회원23
+( 10000023, 20000010, '친구10', '../images/photo/f10.jpg' ),
+( 10000023, 20000011, '친구11', '../images/photo/f11.jpg' ),
+-- 회원24
+( 10000024, 20000011, '친구11', '../images/photo/f11.jpg' ),
+( 10000024, 20000012, '친구12', '../images/photo/f12.jpg' ),
+-- 회원25
+( 10000025, 20000012, '친구12', '../images/photo/f12.jpg' ),
+-- 회원26
+( 10000026, 10000001, '회원01', '../images/photo/m01.jpg' ),
+( 10000026, 10000029, '회원29', '../images/photo/m29.jpg' ),
+-- 회원27
+( 10000027, 10000026, '회원26', '../images/photo/m26.jpg' ),
+-- 회원28
+( 10000028, 10000029, '회원29', '../images/photo/m29.jpg' ),
+-- 회원29
+( 10000029, 10000027, '회원27', '../images/photo/m27.jpg' ),
+( 10000029, 20000013, '친구13', '../images/photo/f13.jpg' ),
+-- 회원30
+( 10000030, 10000029, '회원29', '../images/photo/m29.jpg' ),
+( 10000030, 20000013, '친구13', '../images/photo/f13.jpg' ),
+-- 회원31
+( 10000031, 10000026, '회원26', '../images/photo/m11.jpg' ),
+( 10000031, 20000013, '친구13', '../images/photo/f13.jpg' ),
+-- 회원32
+( 10000032, 10000001, '회원01', '../images/photo/m11.jpg' ),
+( 10000032, 20000013, '친구13', '../images/photo/f13.jpg' );
+
+/* 방관련 정보(ROOM, PATH_LOC, ROOM_MBR) */
+-- 1번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 1:00:0.000000'), 20000, 26000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(), 0, '강남역', 1944444.7947507137, 958252.2212954559 ),
+( LAST_INSERT_ID(), 99, '강남역', 1944444.7947507137, 958252.2212954559 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000002, null    , null, 0 ),
+( LAST_INSERT_ID(), 10000003, 10000002, null, 1 ),
+( LAST_INSERT_ID(), 10000004, 10000003, null, 2 );
+-- 2번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 1:10:0.000000'), 21500, 27000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트아카데미'     , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'           , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000005, null, null, 0 );
+-- 3번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 2:20:0.000000'), 20000, 26000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '강남역', 1944444.7947507137, 958252.2212954559 ),
+( LAST_INSERT_ID(), 99, '신림역', 1942926.8986323199, 949582.3412903354 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000008, null, null, 0 );
+-- 4번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 5:00:0.000000'), 21500, 27000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트아카데미'     , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '이철헤어커커 신림', 1942929.6593462331, 949438.156302435 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000011, null    , null    , 0 ),
+( LAST_INSERT_ID(), 10000012, 10000011, 20000003, 1 ),
+( LAST_INSERT_ID(), 10000013, 10000012, 20000004, 2 );
+-- 5번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 6:00:0.000000'), 14000, 19000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '강남역'       , 1944444.7947507137, 958252.2212954559 ),
+( LAST_INSERT_ID(), 99, '대학로로터리' , 1954187.641569722, 955912.1639432621 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000014, null    , null    , 0 ),
+( LAST_INSERT_ID(), 10000015, 10000014, null    , 1 ),
+( LAST_INSERT_ID(), 10000016, 10000015, null    , 2 );
+-- 6번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 5:00:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트아카데미' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000017, null, null, 0 );
+-- 7번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 6:00:0.000000'), 14000, 19000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '강남역', 1944444.7947507137, 958252.2212954559 ),
+( LAST_INSERT_ID(), 99, '신림역', 1942926.8986323199, 949582.3412903354 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000020, null, null, 0 );
+-- 8번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 6:45:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트아카데미', 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '대현오피스텔', 1943049.075365723, 949359.22264851 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000023, null    , null    , 0 ),
+( LAST_INSERT_ID(), 10000024, 10000023, 20000011, 1 ),
+( LAST_INSERT_ID(), 10000025, 10000024, 20000012, 2 );
+-- 9번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 7:00:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '양재우리집'   , 1942036.8700700814, 959272.2741138777 ),
+( LAST_INSERT_ID(), 99, '신림역'       ,1942926.8986323199, 949582.3412903354 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000026, null		, null,     0 ),
+( LAST_INSERT_ID(), 10000027, 10000026	, null,     1 ),
+( LAST_INSERT_ID(), 10000028, 10000027	, 10000026, 2 );
+-- 10번방
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 7:20:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000029, null		, null,     0 ),
+( LAST_INSERT_ID(), 10000030, 10000029	, null,     1 ),
+( LAST_INSERT_ID(), 10000031, 10000030	, 10000026, 2 ),
+( LAST_INSERT_ID(), 10000032, 10000031	, 20000013, 3 );
+
+
+/* 피드 (FEED) */
+insert into feed( FEED_CONTENT, MBR_ID, FEED_REG_DATE, ROOM_NO )
+values
+( '안녕하세요'				, '10000029', now(), LAST_INSERT_ID()),
+( '10번 출구에서 만날까요?'	, '10000030', now(), LAST_INSERT_ID()),
+( '네 그래요'				, '10000031', now(), LAST_INSERT_ID());
+
+
+/* 자주가는 목적지 정보(FVRT_LOC) */
+insert into FVRT_LOC( MBR_ID, FVRT_LOC_NAME, FVRT_LOC_LAT, FVRT_LOC_LNG, FVRT_LOC_REG_DATE, FVRT_LOC_RANK, FVRT_LOC_STATUS )
+values
+( '10000001', '서울시 관악구 신림동 86-3 청암두산위브빌딩',      '1942926.89863232', '949582.341290335',   now(), 0, 'F' ),
+( '10000001', '서울특별시 종로구 혜화동 126-4 혜화로터리',       '1954187.641569722', '955912.1639432621', now(), 0, 'F' ),                 
+( '10000001', '비트교육센터 서울특별시 서초구 서초2동 1327-33',  '1945043.384320117', '958645.2844253756', now(), 0, 'F' );
+
+
+
+
+/* 결점있는 테스트 데이터 - 방리스트 테스트를 위함 */
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 7:30:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 7:40:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 7:50:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 8:00:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 8:10:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 8:20:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 8:30:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 8:50:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:00:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:10:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:20:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:30:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:40:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );
+insert into room ( room_start_time, room_distance, room_fare, room_reg_date )
+values ( ADDTIME(now(), '1 9:50:0.000000'), 14500, 20000, now() );
+insert into room_path ( room_no, path_rank, path_name, path_lat, path_lng )
+values 
+( LAST_INSERT_ID(),  0, '비트교육센터' , 1944057.4305749675, 958284.3996343074 ),
+( LAST_INSERT_ID(), 99, '혜화역'       , 1953790.8525704339, 956023.6917773776 );
+insert into room_mbr ( room_no, mbr_id, room_mbr_id, frnd_rel_id, room_mbr_rank )
+values 
+( LAST_INSERT_ID(), 10000033, null		, null,     0 );

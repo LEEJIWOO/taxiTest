@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.oldboy.dao.MbrDao">
+    
+    <insert id="signUp" parameterType="Mbr">
+	    insert into	MBR ( MBR_ID, MBR_NAME, MBR_PHONE_NO, 
+	    			MBR_PHOTO_URL, MBR_GENDER, MBR_REG_DATE)
+	    values 		(#{mbrId}, #{mbrName}, #{mbrPhoneNo}, 
+	    			 #{mbrPhotoUrl}, #{mbrGender}, now() ) 
+	</insert>
+    	
+	<select id="getLoginInfo" parameterType="string" resultType="LoginInfo">
+	    SELECT 	a.mbr_id 		as mbrId
+	    	, 	a.mbr_name 		as mbrName
+	    	,	a.mbr_phone_no 	as mbrPhoneNo
+	    	, 	a.mbr_photo_url as mbrPhotoUrl
+	    	, 	a.mbr_gender 	as mbrGender
+	    	, 	a.mbr_reg_date 	as mbrRegDate
+	    	,	b.start_range 	as startRange 
+            ,	b.end_range 	as endRange 
+	    FROM 	MBR a, SETTING b
+	    WHERE 	1 = 1
+	    	AND	a.mbr_id = b.mbr_id
+	    	AND a.mbr_id = #{value}
+	</select>
+	
+	
+	<delete id="deleteMbr" parameterType="String"> 
+        delete from MBR  
+        where MBR_ID=#{value}  
+    </delete> 
+	
+</mapper>
+
+

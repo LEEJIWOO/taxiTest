@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<!-- JQuery -->
+<link rel="stylesheet" href="../css/jquery.mobile-1.3.2.css">
+<!-- JQueryMobile DataBox -->
+<link href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" rel="stylesheet" />
+<!-- Theme -->
+<link rel="stylesheet" href="../css/themes/taxi.css" />
+<!-- Added -->
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="settings.css">
+
+<!-- JQuery -->
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/jquery.mobile-1.3.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<!-- JQueryMobile DataBox -->
+<script src="http://dev.jtsage.com/jquery.mousewheel.min.js"></script>
+<script src="../js/jquery.mobile.datebox.js"></script>
+<!-- Olleh Map -->
+<script src="http://map.ktgis.com/MapAPI/serviceJSP/AuthAPI.jsp?key=MXBmMnRvUnhPOVdCMEtMdjdYaHdTOFdKREg2SW9nNkhKQXBXVXpab0Ezd1J4UWVlT3M6QmJxR0h4Y2JnYmdaRGUxcDR1djdqYU5oMlhEbFZGWnpNOUlRZzZwckdyNTdxS3A4MHo=&module=Map,Geocoder,Directions"></script>
+<!-- iscroll 관련 js  -->
+<script src="../js/iscroll.js"></script>
+<!-- Added -->
+<script src="../js/common.js"></script>
+<script src="settings.js"></script>
+<!-- <script src="../auth/auth.js"></script> -->
+
+
+
+</head>
+<body>
+<div id="fb-root"></div>
+	<!-- page -->
+	<div data-role="page" data-theme="f">
+		<!-- header -->
+		<header data-role="header" id="header" data-theme="f">
+			<a href="#" data-role="button" data-icon="home">홈</a>
+			<h1>설정</h1>
+		</header>
+		
+		<!-- content -->
+		<div data-role="content" id="content" data-theme="f">
+			<div>
+				<ul id="list" data-role="listview" 
+					data-corners="false">
+					<li data-role="list-divider" data-theme="c" id=myInfo>내정보 관리</li>
+					
+					<!-- 친구정보갱신 -->
+					<!-- <li>
+					<button class="show-page-loading-msg" id="frndRefresh"
+							data-textonly="false" data-textvisible="true" data-theme="d" 
+							data-msgtext="정보 갱신중.." data-inline="false">친구정보 갱신</button>
+							<button id="stop" class="hide-page-loading-msg" data-inline="false" data-icon="delete">중지</button></li>-->
+					<li data-icon="check">
+						<a href="#popupLogout" id="btnLogout" data-rel="popup" 
+							data-position-to="window" data-inline="false">로그아웃</a></li>
+					<li data-icon="check" id="out">
+						<a href="#popupLeaveMember" id="btnLeaveMember" data-rel="popup" 
+							data-position-to="window" data-inline="false">회원탈퇴</a></li>
+					<!-- <li data-icon="check">
+						<a href="#frndReset" id="btnfrndReset"
+							data-rel="popup" data-position-to="window" data-inline="false">친구목록 갱신</a></li>  -->
+				</ul>
+				
+			</div>
+			
+			<!-- 회원탈퇴 확인 팝업 -->
+			<div id="popupLeaveMember" data-role="popup" data-corners="false">
+				<div data-role="header" data-theme="f" class="ui-corner-top">
+			        <h1>택시어플</h1>
+			    </div>
+			    <div data-role="content" class="ui-corner-bottom ui-content">
+					<p>정말로 탈퇴하시겠습니까?</p>
+					<a href="#" id="btnCancel" data-role="button" data-inline="true" data-rel="back"
+						data-corners="false" data-mini="true">취소</a>
+					<a href="#" id="btnLeave" data-role="button" data-inline="true" data-rel="back"
+						data-transition="flow" data-corners="false"
+						data-mini="true">탈퇴</a>
+				</div>
+			</div>
+			<!-- 로그인아웃 확인 팝업 -->
+			<div id="popupLogout" data-role="popup" data-corners="false">
+				<div data-role="header" data-theme="f" class="ui-corner-top">
+			        <h1>택시어플</h1>
+			    </div>
+			    <div data-role="content" class="ui-corner-bottom ui-content">
+					<p>정말로 로그아웃하시겠습니까?</p>
+					<a href="#" id="btnLogoutCancel" data-role="button" data-inline="true" data-rel="back"
+						data-corners="false" data-mini="true">취소</a>
+					<a href="#" id="btnLogoutAccept" data-role="button" data-inline="true" data-rel="back"
+						data-transition="flow" data-corners="false"
+						data-mini="true">아웃</a>
+				</div>
+			</div>
+		</div><!-- //content -->
+		
+		<!-- 즐겨찾기 목록 불러오기 및 삭제,수정  -->
+			
+		    <div>
+				<ul id="list" data-role="listview" 
+					data-corners="false">
+					<li data-role="list-divider" data-theme="c" id=myInfo>등록 정보 설정</li>
+					</ul>
+					</div>
+			<div id="myInfoManager">
+			<div data-theme="f" data-content-theme="c" data-corners="false"
+				id="btnList">
+
+				<a href="#" id="btnList1" data-icon="list" data-corners="false"
+					data-role="button">등록 목적지 삭제</a>
+
+			</div>
+			<div class="content">
+				<ul id="favoriteUl" data-role="listview" data-inset="false"
+					data-theme="f" data-corners="false" class="list">
+				</ul>
+				
+				<div id="popupDeleteLoc" data-role="popup" data-corners="false">
+				
+			</div>
+			</div>
+			
+			<!-- 등록지 삭제 팝업 -->
+			 <div id="popupFvrtLoc" data-role="popup" data-corners="false">
+				<div data-role="header" data-theme="f" class="ui-corner-top">
+			        <h1>택시어플</h1>
+			    </div>
+			    <div data-role="content" class="ui-corner-bottom ui-content">
+					<p>등록된 목적지를 삭제하시겠습니까?</p>
+					<a href="#" id="btnDeleteLocCancel" data-role="button" data-inline="true" 
+						data-corners="false" data-mini="true">취소</a>
+					<a href="#" id="btnDeleteLoc" data-role="button" data-inline="true" 
+						data-transition="flow" data-corners="false"
+						data-mini="true">삭제</a>
+				</div>
+			</div> 
+			
+			<!-- 즐겨찾기 우선순위 변경 -->
+			<div data-theme="f" data-content-theme="c" data-corners="false"
+				id="btnChange">
+				<a href="#" id="btnList2" data-icon="list" data-corners="false"
+					data-role="button">등록 목적지 우선순위 변경</a>
+
+			</div>
+			<div data-role="content" class="contents" data-theme="f">
+				<ol id="sortable" data-icon="false" data-role="listview" data-inset="false"
+					data-theme="f" data-corners="false" class="list">
+				</ol>
+				<div>
+					<ul id="btnFvrtUi" data-role="listview" data-corners="false">
+						<li data-icon="check" id="btnFvrtLocUpdate"><a id="save"
+							href="#" data-position-to="window" data-inline="false">저 장</a></li>
+
+					</ul>
+				</div>
+			</div>
+			<!--  검색지반경설정 type 1 -->
+			<div id="seach" data-theme="f" data-role="collapsible"
+			data-content-theme="d" data-corners="false">
+			<h4 class="circle">검색지반경설정</h4>
+			<form id="updateRange" method="post" name="updateRange" action="" data-role="listview" data-inset="true" >
+
+				<ul data-role="listview" data-inset="true" >
+					<li id="span_id" value="">
+					<span>현재 출발지 반경(m):</span>
+					<input value="" type="text" id="startRange1" name="no" readonly >
+					<select name="start" id="startRange" class="select"
+						onchange="selected" data-corners="false" data-theme="f">
+						
+							<option  value='500' >출발지 반경500m</option>
+							<option  value='1000' >출발지 반경1000m</option>
+							<option  value='2000' >출발지 반경2000m</option>
+							<option value='3000' >출발지 반경3000m</option>
+
+					</select></li>
+
+					<li id="span_id">
+					현재 도착지 반경(m): <input type="text" id="endRange1" name="no" readonly class="view-project">
+					<select name="end" id="endRange" class="select" onchange="selected"
+						data-corners="false" data-theme="f">
+							<option value='500'>도착지 반경500m</option>
+							<option value='1000'>도착지 반경1000m</option>
+							<option value='2000'>도착지 반경2000m</option>
+							<option value='3000'>도착지 반경3000m</option>
+
+					</select></li>
+               
+ 
+					<li><input id="btnAdd" type="button" value="등록" data-theme="c" data-corners="false">
+					</li>
+					
+				</ul> 
+			</form>
+		</div>
+			<!--  검색지반경설정 type 1 -->
+		<!-- <div id="seach" data-theme="f" data-role="collapsible"
+			data-content-theme="d" data-corners="false">
+			<h4 class="circle">검색지 반경 설정</h4>
+ 			    <div>
+					<ul data-role="listview" data-theme="c" data-corners="false">
+						<li data-role="list-divider" data-theme="c">출발지 변경</li>
+					</ul>
+				</div>
+				<form id="updateRange" id="startRange">
+				<div data-role="navbar" data-grid="c" >
+					<ul id="startRange">
+						<li><a href="#" class="ui-btn-active">500m</a></li>
+						<li><a href="#">1000m</a></li>
+						<li><a href="#">2000m</a></li>
+						<li><a href="#">3000m</a></li>
+					</ul>
+					</div>
+					도착지 변경
+				<div>
+					<ul data-role="listview" data-theme="c" data-corners="false">
+						<li data-role="list-divider" data-theme="c">도착지 변경</li>
+					</ul>
+				</div>
+				<div data-grid="c" data-role="navbar">
+					<ul id="endRange">
+
+						<li><a href="#" class="ui-btn-active">500m</a></li>
+						<li><a href="#">1000m</a></li>
+						<li><a href="#">2000m</a></li>
+						<li><a href="#">3000m</a></li>
+					</ul>
+				</div>
+				<div>
+					<ul id="btnAdd" data-role="listview" data-corners="false">
+						<li data-icon="check"><a id="save" href="#" data-inline="false">저 장</a></li>
+
+					</ul>
+				</div>
+				</form>
+				</div> -->
+		</div>
+	</div><!-- //page -->
+</body>
+</html>

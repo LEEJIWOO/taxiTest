@@ -1,0 +1,87 @@
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Hun'; 
+    src: url('../fonts/Hun.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Youn'; 
+    src: url('../fonts/Youn.ttf') format('truetype');
+}
+
+#login{
+    margin-top: 230px;
+}
+
+.mainIco{
+    margin-left: 120px;
+}
+
+
+#mainFont{
+    font-family: 'Hun';
+    font-size: 300%;
+    margin-left: 50px;
+}
+
+#btnLoginFB{
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+
+#info{
+    font-family: 'Nanum Gothic', 'Helvetica', 'Arial', 'Sans-Serif';
+    font-size: medium;
+    line-height: 160%;
+}
+
+#loadFont{
+    font-family: 'Hun';
+    font-size: 200%;
+    margin-left: 50px;
+}
+
+#loadIco{
+/*     margin-left: 120px; */
+/*     margin-top: 240px; */
+    width: 100%;
+    height: 100%;
+}
+
+#icons{
+    width: 50px;
+   /* float: left;*/
+}
+
+
+.ui-body-f{
+	border: 0px solid red;
+}
+
+#result{
+    font-family: 'Nanum Gothic', 'Helvetica', 'Arial', 'Sans-Serif';
+    font-size: 130%;
+    color: black;
+    margin-left: 120px;
+    
+}
+
+#enter {
+    font-family: 'Nanum Gothic' ;
+    
+}
+
+#line {
+    margin-top: 10px;
+}

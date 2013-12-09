@@ -1,0 +1,295 @@
+@CHARSET "UTF-8";
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+
+div#divMapWrap {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    /*
+    margin-left: -15px;
+        margin-top: 28px;
+        margin-bottom: -15px;*/
+    padding: 0;
+}
+
+div#canvas_map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+div#divRelationBtn {
+    position: absolute;
+    top: 70px;
+    left: 5px;
+    z-index: 97;
+    opacity: 0.7;
+}
+
+#popupRelation{
+    width: 270px;
+    height: 310px;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+#myCanvas{
+    width: 100%;
+    height: 270px;
+}
+
+
+.ui-content .ui-listview-inset {
+    margin:0px;
+}
+
+#relationView{
+    display: block;
+    position: absolute;
+    /*top: 510px;*/
+    left: -3px;
+    z-index: 97;
+    bottom:0px;
+    background-color: blue;
+}
+
+#mbr01 {
+      display: block;
+    position: absolute;
+    /*top: 510px;*/
+    left: -3px;
+    z-index: 97;
+    bottom:20px;
+    background-color: blue;
+}
+
+
+
+#mbrName{
+/*     border: 2px solid red; */
+    font-size: 150%;
+
+}
+
+
+body {
+    font-size:12px;
+    -webkit-user-select:none;
+    -webkit-text-size-adjust:none;
+    font-family:helvetica;
+}
+
+
+#wrapper {
+/*     position:absolute;  */
+    z-index:1;
+    top:0px; bottom:0px; left:0; right:0;
+    width:100%;
+/*     height:300px; */
+    overflow:hidden;
+}
+
+#scroller {
+/*     position:absolute;  */
+    z-index:1;
+/*  -webkit-touch-callout:none;*/
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    width:100%;
+    padding:0;
+}
+
+.ui-listview {
+    padding:0px;
+    margin:0px;
+
+}
+
+#commentList{
+    padding:0px;
+    margin:0px;
+    position: relative;
+    width: 100%;
+}
+
+.ui-listview ui-listview-inset ui-shadow {
+    border: blue;
+    margin:0px;
+    padding: 0px;
+}
+
+#feedView{
+    /*border: 3px solid blue;*/
+    position: relative;
+    width: 100%;
+    /*margin-top: 110px;*/
+}
+
+#icons{
+    width: 50px;
+    float: left;
+ }
+
+#mainHeader{
+    font-size: 140%;
+    height: 87px;
+    text-align: center;
+    padding-top: 10px;
+    position: fixed;
+}
+
+#mainHeader #roomInfo{
+    font-family: 'Nanum Gothic';
+    font-size: 150%;
+    /*height: 20px;*/
+    color: black;
+
+    /*
+    margin-top: 50px;
+        margin-left: 150px;*/
+}
+
+.ui-content {
+    padding:0px;
+    margin:0px;
+}
+
+
+
+#roomSubHeader{
+    width: 100%;
+    padding: 0;
+    margin-top:7px;
+}
+
+#roomHeaderUl{
+      width: 100%;
+/*       border: 2px solid blue; */
+}
+
+
+.ui-li .ui-li-static .ui-btn-up-f .ui-first-child .ui-last-child {
+/*     border: 2px solid red; */
+    margin: 0;
+    padding: 0;
+}
+
+
+#btnDelete{
+    float: right;
+    position: relative;
+}
+
+#main1{
+    font-family:     Verdana, Geneva, Arial, sans-serif;
+    font-size: 140%;
+    /*height: 20px;*/
+    color: black;
+    margin-top: 0px;
+    margin-left: 130px;
+}
+
+#feedList {
+    padding-bottom: 0px;
+}
+
+#roomStartTime {
+    float: left;
+    font-size: 200%;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+#roomStartDay {
+     float: left;
+     color: green;
+     font-size: 120%;
+     margin-top: 19px;
+     margin-left: 5px;
+}
+
+#fareName {
+     font-family: 'Nanum Gothic';
+     float: right;
+     margin-top: 5px;
+     margin-bottom: 0px;
+}
+
+#addedFare{
+     color: red;
+     font-size: 90%;
+     font-family: 'Nanum Gothic';
+     float: right;
+     margin-top: 5px;
+     margin-bottom: 0px;
+}
+
+.ui-li-thumb{
+    clear:all;
+}
+
+#roomFare{
+    float: right;
+    font-size: 110%;
+    color: darkred;
+}
+
+#myFare{
+    float: right;
+    clear: right;
+    color: green;
+    font-size: 90%;
+    margin-top: 3px;
+    font-family: 'Nanum Gothic';
+}
+
+
+
+#roomDistance{
+   /*
+    float: right;
+       clear: right;
+       color: green;
+       font-size: 90%;
+       margin-top: 3px;*/
+   display: block;
+   position: fixed;
+   right: 3px;
+   z-index: 97;
+   top:100px;
+   font-size: 130%;
+   font-family: 'Nanum Gothic';
+   color: white;
+   background-color: brown;
+}
+
+
+#relationView{
+    display: block;
+    position: absolute;
+    /*top: 510px;*/
+    left: -3px;
+    z-index: 97;
+    bottom:0px;
+}
+
+.ui-li-thumb{
+    margin-bottom: 0;
+    padding-bottom: 0px;
+}
+
+.ui-li-desc{
+    padding-bottom :0;
+    margin-bottom: 0;
+}

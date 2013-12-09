@@ -1,0 +1,368 @@
+@CHARSET "UTF-8";
+
+section[data-role=content] {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;	
+}
+
+
+/* 출발지 목적지 */
+#divStartEndLoc {
+	margin: 0px;
+	padding: 6px;
+	width: 100%;
+	height: 70px;
+	position: absolute;
+	top: 0px;
+	z-index: 1;
+	background: #fafbfd; 
+	box-shadow: 0px 1px 10px #ccc;
+}
+.divLocationInput {
+ 	position: relative; 
+	width: 100%;
+	height: 34px;
+}
+#startInput {
+	border: 1px solid #aaa;
+ 	position: absolute;
+	width: 100%;
+	height: 33px;
+	padding: 0px 30px;
+	z-index:99;
+	font-size:12pt;
+	border-radius: 3px 3px 0px 0px;
+	font-family: Nanum Gothic;
+	font-size: small;
+	text-shadow: none;
+}
+#endInput {
+	border: 1px solid #aaa;
+ 	position: absolute;
+	width: 100%;
+	height: 33px;
+	padding: 0px 30px;
+	z-index: 99;
+	font-size:12pt;
+	border-radius: 0px 0px 3px 3px;
+	font-family: Nanum Gothic;
+	font-size: small;
+	text-shadow: none;
+}
+.aSearchClear {
+	float: right;
+	position: absolute;
+	right:0px;
+	margin : 0px 12px 0px 0px;	
+	cursor: pointer;
+ 	width: 35px;	
+	height: 35px;	
+ 	z-index:100;
+}
+.cancleIcon {
+  	width: 12px;
+ 	height: 12px;
+ 	z-index:100;
+ 	padding: 11px 0px 0px 10px;
+}
+.aCurrentLocAndFavoriteIcon {
+	float: left;
+	position: absolute;
+	left: 0px;
+	margin: 0px;
+	cursor: pointer;
+	width: 35px;
+	height: 35px;
+	z-Index:100;
+}
+.imgCurrentLocAndFavoriteIcon {
+	width: 17px;
+ 	height: 17px;
+ 	z-index:100;
+ 	padding: 9px 0px 0px 8px;
+}
+
+
+/* 맵 관련 */
+div#divMapWrap {
+	width: 100%;
+	height: 400px;
+	position: relative;
+	margin-top: 82px;
+}
+div#canvas_map {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+
+
+/* 등록 관련 */
+a#btnAddViewRoom {
+	cursor: pointer;
+	position: absolute;
+	border-top: 0.1em solid #eee;
+	border-right: 0.1em solid #eee;
+	border-bottom: 0.1em solid #eee;
+	border-left: 0.1em solid #ddd;
+	z-index: 999;
+	left: 0.1em;
+	bottom: 8.3em;
+	width: 80px;
+	height: 70px;
+	text-align:  center;
+	background: #fafbfd;
+	box-shadow: 0px 1px 5px #dadada;
+	border-radius: 3px;
+}
+a#btnAddViewRoom:hover { background: #c6ecf8; border: 1px solid #c6ecf8; box-shadow: 0px 1px 5px #c6ecf8; z-index: 999; }
+#btnAddViewRoom img {
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin: 0px auto;
+}
+#btnAddViewRoom span {
+	display: block;
+	font-size: 1.0em;
+	font-family: Nanum Gothic;
+	color: #33b4e4;
+	font-weight: bold;
+	letter-spacing: -1px;
+	text-shadow: none;
+	margin: 0px;
+}
+
+/* 방목록 */
+#wrapper {
+	width: 100%;
+	height: 8em;
+	float: left;
+	position: absolute;	
+	z-index: 999;			
+	overflow: hidden;
+	background: #fafbfd;
+	box-shadow: 0px 1px 10px #ccc;
+}
+#scroller {
+	width: 10000px;
+	height: 100%;
+	float: left;
+	padding: 0;
+}
+#scroller ul {
+	list-style: none;
+	display: block;
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	text-align:left;
+}
+#scroller li {
+	width: 100%; 
+	height: 7em;
+	display: block; float: left;
+	text-align: center;
+	font-family: georgia;
+	font-size: 18px;
+}
+div.divMsgArea {
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+div.divMsgArea h2 {
+	font-size: 1.0em;
+	color: #aaa;
+	margin: 1.0em 0 0 0.5em;
+	padding: 0px;
+}
+div.divRoomInfoArea {
+	top: 0px;
+	margin: 0px;
+	padding: 0px;	
+}
+div.divRoomInfoArea h2 {
+	float: left;
+	font-size: 250%;
+	font-weight: bold;
+	margin: 0.1em 0.3em;
+	padding: 0px;
+}
+div.divRoomMbrThumbs {
+	height: 3.0em;
+	text-align: right;
+	margin: 0px;
+	padding: 0.5em 1em;
+}
+div.divRoomMbrThumbs img {
+	width: 2.5em;
+	heigth: 2.5em;
+	margin: 0.1em;
+	padding: 0px;
+	border-radius: 50px;
+}
+
+div.divBtnArea {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 2.5em;
+}
+a.btnJoinRoom {
+	cursor: pointer;
+	width: 94%;
+	height: 3em;
+	border-top: 0.1em solid #eee;
+	border-right: 0.1em solid #eee; 
+	border-bottom: 0.1em solid #eee;
+	border-left: 0.1em solid #ddd; 
+	text-decoration:none;
+	padding: 10px 30%;
+	background: white;
+	font-family: Nanum Gothic;
+	box-shadow: 0px 1px 5px #dadada;
+	border-radius: 3px;
+}
+a.btnJoinRoom:hover { background: #c6ecf8; border: 1px solid #c6ecf8; box-shadow: 0px 1px 5px #c6ecf8; }
+a.btnJoinRoom span {
+	font-size: 1.2em;
+	color: #33b4e4;
+	font-weight: bold;
+	letter-spacing: -1px;
+	text-shadow: none;
+}
+
+/* 방목록 키웠을 때*/
+.liRoomList {
+	height:100%;
+}
+.divRoomDetailInfo {
+	width:100%;
+	height:27em; 
+	background: #fafbfd;
+}
+.divRoomPathInfo {
+	border-top:1px solid #a6a6a6;
+	background: #fafbfd;
+	height:6em;
+	text-align: left;
+	left: 100px;
+	margin: 0px 10px;
+}
+.imgDownArrow {
+	left:15px;
+	top:95px;
+	float:left;
+	width:45px;
+	height:67.5px;
+	margin:20px 0px 0px 5px;
+}
+.divCanvas {
+	border-top:1.5px solid #dddddd;
+	border-bottom:1.5px solid #dddddd;
+	padding:10px 0px;
+	margin: 0px 10px;
+}
+.startLocName {
+	border-bottom: 1px solid #e8e8e8;
+	margin-top: 17px;
+	margin-left: 60px;
+	padding-bottom: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.endLocName {
+	margin-top:-10px;
+	margin-left: 60px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.divRoomDistanceAndFare {
+	height: 3.0em;
+	text-align: right;
+	margin: 0px;
+	padding: 0.5em 1em;
+}
+.distance{
+	heigth: 2.5em;
+	margin: 0.1em;
+	padding: 0px;
+}
+.fare{
+	margin-top:0px;
+}
+.canvas {
+	width: 320px;
+	height: 320px;
+}
+
+
+
+/* 방등록 관련 */
+div#divAddRoomCondition_popup {
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+
+#radioDaySelect {
+	text-align: right;
+	margin: 0px;
+	padding: 5px 10px 0px 0px;
+}
+
+#radioDaySelect legend {
+	float: left;
+	margin: 10px;
+}
+
+.btnAddRoomUI {
+	margin-bottom: 10px;
+}
+.ui-input-text {
+	margin: 0px;
+}
+
+.ui-input-search, div.ui-input-text {
+	margin: 0px;
+}
+
+
+  
+/* 즐겨찾는 위치 */  
+#favoriteUl{ 
+	height: auto; 
+} 
+#favoriteList{ 
+    height: 40px; 
+	overflow: hidden; 
+} 
+#favoriteLink.ui-link-inherit{ 
+  margin: 0px; 
+} 
+
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Hun'; 
+    src: url('../fonts/Hun.ttf') format('truetype');
+}
+
+

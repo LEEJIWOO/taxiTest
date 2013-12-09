@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-1.10.2.js"></script>
+<!-- Olleh Map -->
+<script src="http://map.ktgis.com/MapAPI/serviceJSP/AuthAPI.jsp?key=MXBmMnRvUnhPOVdCMEtMdjdYaHdTOFdKREg2SW9nNkhKQXBXVXpab0Ezd1J4UWVlT3M6QmJxR0h4Y2JnYmdaRGUxcDR1djdqYU5oMlhEbFZGWnpNOUlRZzZwckdyNTdxS3A4MHo=&module=Map,Geocoder,Directions"></script>
+
+<script type="text/javascript">
+var map;
+
+$(document).ready(function() {
+	
+	var startCoord = new olleh.maps.Coord(959272.2741, 1942036.8700); 
+	var endCoord = new olleh.maps.Coord(956023.6917, 1953790.8525);
+	var coordArr = [];
+	console.log( "s:", startCoord.getX(), "|", startCoord.getY() );
+	console.log( startCoord.getX() - endCoord.getX(), startCoord.getY() - endCoord.getY() );
+	for(var i = 0; i < 3; i++) {
+		console.log( (startCoord.getX() - endCoord.getX()) * (i+1) / 4, (startCoord.getY() - endCoord.getY()) * (i+1) / 4 );
+		var x = startCoord.getX() + ((startCoord.getX() - endCoord.getX()) * (i+1) / 4);
+		var y = startCoord.getY() + ((startCoord.getY() - endCoord.getY()) * (i+1) / 4);
+		console.log( i+":", x, "|", y );
+		coordArr[i] = new olleh.maps.Coord(x, y);
+	}
+	console.log( "e:", endCoord.getX(), "|", endCoord.getY() );
+//	curPoint = new olleh.maps.Point( 127.039372, 37.476663 );		//양재우리집				37.476663,127.039372	==>	1942036.8700700814, 959272.2741138777 
+//	curPoint = new olleh.maps.Point( 127.001928, 37.582456 );		//혜화역					37.582456, 127.001928	==>	1953790.8525704339, 956023.6917773776
+	
+  	var mapOptions = {  	
+     	center : startCoord,
+     	zoom : 10,
+     	mapTypeId : olleh.maps.MapTypeId.BASEMAP
+  	}; 
+  	map = new olleh.maps.Map(document.getElementById("canvas_map"), mapOptions);
+  	
+  	$("#moveToBtn").click(function() {
+  		alert("click");
+  		map.moveTo( coordArr[2], 10);
+//   		for(var i in coordArr) {
+//   			console.log(i);
+//   			map.moveTo( coordArr[i], 10);
+// //   			window.setTimeout(1000);
+//   			sleep(1000);
+// // 			$.delay(1000);
+//   		}
+  	});
+});
+
+function sleep(milliseconds) {
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) {
+	    if ((new Date().getTime() - start) > milliseconds){
+	      break;
+	    }
+	  }
+	}
+</script>
+
+</head>
+
+<body>
+ <div id="canvas_map" style="position:absolute; width:100%; height:90%; left:0px; top:0px;"></div>
+ <a id="moveToBtn" style="position: absolute; bottom: 30px;">좌표 이동</a>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.oldboy.dao.RoomMbrDao">
+	<select id="getRoomDtlList" parameterType="map" resultType="roomMbr">
+		SELECT
+				room_no         AS roomNo
+			,	mbr_id          AS mbrId
+	        ,	gcm_reg_id 		AS gcmRegId
+		FROM
+				ROOM_MBR
+		WHERE
+				1 = 1
+		    AND room_no = #{roomNo}
+		    AND mbr_id not like #{mbrId}
+	</select>
+
+	<select id="getRoomMbrCount" parameterType="int" resultType="int">
+		SELECT
+				count(*) AS roomMbrCount
+		FROM
+				ROOM_MBR
+		WHERE
+				1 = 1
+		    AND room_no = #{roomNo}
+	</select>
+
+
+	<insert id="addRoomMbr" parameterType="RoomMbr">
+        insert into ROOM_MBR
+        	( ROOM_NO, MBR_ID, ROOM_MBR_ID, FRND_REL_ID, ROOM_MBR_RANK, GCM_REG_ID )
+        values
+        	( #{roomNo}, #{mbrId}, #{roomMbrId}, #{frndRelId}, #{roomMbrRank}, #{gcmRegId} )
+    </insert>
+
+
+	<delete id="deleteRoomMbr" parameterType="String">
+        delete from ROOM_MBR
+        where 	1 = 1
+        	and	MBR_ID = #{value}
+    </delete>
+
+
+	<select id="getRoomMbrInfo" parameterType="int" resultType="RoomMbr">
+	    SELECT
+	              c.ROOM_NO 		as roomNo
+	            , c.MBR_ID 			as mbrId
+	            , c.MBR_NAME 		as mbrName
+	            , c.MBR_PHONE_NO 	as mbrPhoneNo
+	            , c.MBR_PHOTO_URL 	as mbrPhotoUrl
+	            , c.ROOM_MBR_ID 	as roomMbrId
+	            , c.ROOM_MBR_NAME 	as roomMbrName
+	            , c.ROOM_MBR_PHOTO_URL as roomMbrPhotoUrl
+	            , c.FRND_REL_ID 	as frndRelId
+	            , d.FRND_NAME  		as frndRelName
+			  , c.ROOM_MBR_RANK 	as roomMbrRank
+                 , c.GCM_REG_ID		as gcmRegId
+	     FROM (
+	        select
+				     a.ROOM_NO
+				,    a.MBR_ID
+				,    a.MBR_NAME
+				,    a.MBR_PHONE_NO
+				,    a.MBR_PHOTO_URL
+				,    b.ROOM_MBR_ID
+				,    b.ROOM_MBR_NAME
+				,    b.ROOM_MBR_PHOTO_URL
+				,    a.FRND_REL_ID
+				,    a.ROOM_MBR_RANK
+                    ,    a.GCM_REG_ID
+	              from  (
+	                     SELECT
+	                            a.ROOM_NO,
+	                            a.MBR_ID,
+	                            b.MBR_NAME,
+	                            b.MBR_PHONE_NO,
+	                            b.MBR_PHOTO_URL,
+	                            a.ROOM_MBR_ID,
+	                            a.FRND_REL_ID,
+	                            a.ROOM_MBR_RANK,
+                                 a.GCM_REG_ID
+	                       from
+	                            ROOM_MBR a, MBR b
+	                      where
+	                            a.MBR_ID = b.MBR_ID
+	                             AND a.ROOM_NO = #{value}
+	                   ) a
+	                        LEFT OUTER JOIN
+	                   (
+	                     select
+	                        a.room_no,
+	                            a.ROOM_MBR_ID,
+	                            b.MBR_NAME AS  ROOM_MBR_NAME,
+	                            b.MBR_PHOTO_URL AS ROOM_MBR_PHOTO_URL,
+                                 a.GCM_REG_ID
+	                       from
+	                            ROOM_MBR a, MBR b
+	                      where
+	                            a.ROOM_MBR_ID = b.MBR_ID
+	                         AND
+	                            a.ROOM_NO = #{value}
+	                    GROUP BY a.room_MBR_ID
+	                   ) b
+
+	               on
+	                  a.ROOM_MBR_ID = b.ROOM_MBR_ID
+	                                      ) c
+	                    LEFT OUTER JOIN
+	                (
+	                 select
+	                        a.ROOM_NO,
+	                        a.MBR_ID,
+	                        b.FRND_NAME,
+	                        b.FRND_ID
+	                   from
+	                        ROOM_MBR a, FRND b
+	                  where
+	                        a.FRND_REL_ID = b.FRND_ID
+	                           AND
+	                              a.ROOM_NO = #{value}
+	                           GROUP BY  a.mbr_id
+
+	                                      ) d
+	                                            on
+	                                               1=1
+	                                           and
+	                                               c.ROOM_NO = d.ROOM_NO
+	                                           and
+	                                               c.MBR_ID = d.mbr_id
+	    WHERE  c.ROOM_NO =  #{value}
+	    ORDER BY c.ROOM_MBR_RANK
+	</select>
+
+
+	<select id="isRoomMbr" parameterType="String" resultType="int">
+		SELECT 	count(*)
+		FROM 	ROOM a, ROOM_MBR b
+		WHERE 	1 = 1
+			AND	a.room_no = b.room_no
+			AND b.mbr_id = #{value}
+			AND a.room_start_time > now()
+	</select>
+
+
+	<select id="getVirtualRoomMbr" parameterType="roomMbr" resultType="roomMbr">
+		SELECT  #{roomNo}   AS roomNo
+		    ,   #{mbrId}  	AS mbrId
+		    ,   x1.mbr_id   AS roomMbrId
+		    ,   NULL        AS frndRelId
+		    ,	(SELECT MAX(room_mbr_rank) + 1 FROM ROOM_MBR WHERE room_no = x1.room_no) AS roomMbrRank
+			,	#{gcmRegId} AS gcmRegId
+		FROM
+				ROOM_MBR x1
+		    , 	FRND x2
+		WHERE   x1.mbr_id = x2.frnd_id
+		    AND x1.room_no = #{roomNo}
+		    AND x2.mbr_id = #{mbrId}
+
+		UNION ALL
+
+		SELECT  #{roomNo}   AS roomNo
+		    ,   #{mbrId}  	AS mbrId
+		    ,   x1.mbr_id   AS roomMbrId
+		    ,   x2.frnd_id  AS frndRelId
+		    ,	(SELECT MAX(room_mbr_rank) + 1 FROM ROOM_MBR WHERE room_no = x1.room_no) AS roomMbrRank
+		    ,	#{gcmRegId} AS gcmRegId
+		FROM
+				ROOM_MBR x1
+		    ,   FRND x2
+		WHERE   x1.mbr_id = x2.mbr_id
+		    AND x1.room_no = #{roomNo}
+		    AND x2.frnd_id in   (
+		                            SELECT  x3.frnd_id
+		                            FROM    FRND x3
+		                            WHERE   1 = 1
+		                                AND x3.mbr_id = #{mbrId}
+		                        )
+		LIMIT 1
+	</select>
+
+
+	<delete id="outRoom" parameterType="map">
+		 delete from ROOM_MBR
+		<where>
+				<if test="mbrId != null">
+					MBR_ID = #{mbrId}
+				</if>
+
+				<if test="roomNo != 0">
+					and ROOM_NO = #{roomNo}
+				</if>
+		</where>
+	</delete>
+
+
+</mapper>

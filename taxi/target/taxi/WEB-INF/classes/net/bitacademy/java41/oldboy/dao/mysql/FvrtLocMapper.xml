@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.oldboy.dao.FvrtLocDao">
+    
+	<select id="getFvrtLoc"
+            parameterType="Map" 
+            resultType="FvrtLoc"> 
+                select  
+                        FVRT_LOC_NO 	as fvrtLocNo  
+                     ,  MBR_ID 				as mbrId  
+                     ,  FVRT_LOC_NAME as fvrtLocName 
+                     ,  FVRT_LOC_LAT 	as fvrtLocLat  
+                     ,  FVRT_LOC_LNG 	as fvrtLocLng  
+                   	 ,	FVRT_LOC_REG_DATE	as fvrtLocRegDate	 
+                     ,  FVRT_LOC_RANK 	as fvrtLocRank  
+                     ,  FVRT_LOC_STATUS as fvrtLocStatus 
+                from  	FVRT_LOC
+                where 	1 = 1
+               		and	MBR_ID = #{mbrId}
+               		and 	FVRT_LOC_STATUS = #{fvrtLocStatus}
+<!-- 			<if test='fvrtLocStatus == "F"'> -->
+				order by	FVRT_LOC_RANK
+<!-- 			</if> -->
+<!-- 			<if test='fvrtLocStatus == "F"'> -->
+<!-- 			    order by	FVRT_REG_DATE desc -->
+<!-- 			</if> -->
+    </select>  
+    
+	
+	<select id="getFvrtLocMaxRank"
+	    	parameterType="string"
+	    	resultType="int">
+	    select MAX(FVRT_LOC_RANK) 
+	    from FVRT_LOC
+	    where MBR_ID = #{value};
+	</select>
+    
+      
+     <insert id="addFvrtLoc" 
+            parameterType="FvrtLoc"> 
+        insert into  
+                    FVRT_LOC(  
+                               MBR_ID  
+                             , FVRT_LOC_NAME  
+                             , FVRT_LOC_LAT  
+                             , FVRT_LOC_LNG 
+                             , FVRT_LOC_REG_DATE  
+                             , FVRT_LOC_RANK  
+                             , FVRT_LOC_STATUS   
+                            ) 
+        values       
+                    ( #{mbrId}, #{fvrtLocName}, #{fvrtLocLat},  
+                      #{fvrtLocLng}, now(), #{fvrtLocRank},  
+                      #{fvrtLocStatus} )  
+    </insert> 
+    
+	<update id="updateFvrtLocRank" parameterType="FvrtLoc">
+        update FVRT_LOC
+		set FVRT_LOC_RANK = #{fvrtLocRank}
+ 		where FVRT_LOC_NO = #{fvrtLocNo}
+        order by FVRT_LOC_RANK;
+    </update>
+	
+    
+	<delete id="deleteAllFvrtLoc" parameterType="String"> 
+	    delete from FVRT_LOC  
+	    where MBR_ID=#{value}  
+	</delete>
+	
+
+	<delete id="deleteFvrtLocItem" parameterType="String"> 
+	    delete from FVRT_LOC  
+	    where FVRT_LOC_NO = #{value} 
+	</delete> 
+	
+	
+</mapper>
+
+
