@@ -10,47 +10,64 @@
 	    <result 	property="roomFare" 		column="room_fare"/>
 	    <result 	property="roomRegDate" 		column="room_reg_date"/>
 	    <result 	property="roomMbrCount" 	column="roomMbrCount"/>
+	    <result 	property="differenceTime" 	column="differenceTime"/>
 	    <collection property="roomPathList" 	column="room_no" 	javaType="java.util.ArrayList" 	ofType="RoomPath"
 	        select="net.bitacademy.java41.oldboy.dao.RoomPathDao.getRoomPathList"/>
 	    <collection property="roomMbrList" 		column="room_no" 	javaType="java.util.ArrayList" 	ofType="RoomMbr"
 	        select="net.bitacademy.java41.oldboy.dao.RoomMbrDao.getRoomMbrInfo"/>
 	</resultMap>
-	   
+
+
+    <select id="getStartTimeList" parameterType="string" resultMap="roomResultMap">
+       <![CDATA[
+         SELECT   room_no
+				, room_start_time
+				, MINUTE(addtime(now(), #{value}) - room_start_time) as diferenceTime
+		  FROM 	room
+		 WHERE
+				1=1
+		   AND
+		  		room_start_time between now() and addtime(now(), #{value})
+        ]]>
+    </select>
+
+
+
 	<select id="getRoomList" parameterType="map" resultMap="roomResultMap">
 	    <![CDATA[
-		SELECT  
+		SELECT
 				a.room_no
 		    , 	a.room_start_time
 		    , 	a.room_distance
 		    , 	a.room_fare
 		    , 	a.room_reg_date
 		    ,	count( b.mbr_id ) as roomMbrCount
-		FROM    
+		FROM
 				ROOM a, ROOM_MBR b
-		WHERE	
+		WHERE
 				1 = 1
 			AND	a.room_no = b.room_no
 		    AND a.room_start_time > NOW()
-		    AND a.room_no IN (	
-		    					SELECT	
+		    AND a.room_no IN (
+		    					SELECT
 		    							x1.room_no
-		    					FROM	
+		    					FROM
 		    							(
-					                        SELECT  
+					                        SELECT
 					                                x1.room_no
-					                        FROM    
+					                        FROM
 					                                ROOM_PATH x1
-					                        WHERE   
+					                        WHERE
 					                                1 = 1
 					                            AND x1.path_rank = 0
 					                            AND SQRT(POW(#{startLat} - x1.path_lat, 2) + POW(#{startLng} - x1.path_lng, 2)) <= #{startRange}
 		    							) x1,
 		    							(
-				                            SELECT  
+				                            SELECT
 					                                x2.room_no
-					                        FROM    
+					                        FROM
 					                                ROOM_PATH x2
-					                        WHERE   
+					                        WHERE
 					                                1 = 1
 					                            AND x2.path_rank = 99
 					                            AND SQRT(POW(#{endLat} - x2.path_lat, 2) + POW(#{endLng} - x2.path_lng, 2)) <= #{endRange}
@@ -69,9 +86,9 @@
 		                    AND x1.room_no = a.room_no
 		                    AND x1.mbr_id = x2.frnd_id
 		                    AND x2.mbr_id = #{mbrId}
-		                    
+
 		                UNION ALL
-		                
+
 		                SELECT  1
 		                FROM
 		                        ROOM_MBR x1
@@ -86,47 +103,47 @@
 		                )
 		GROUP BY
 				a.room_no, a.room_start_time, a.room_distance, a.room_fare, a.room_reg_date
-		HAVING	
+		HAVING
 				count( b.mbr_id ) < 4
 		ORDER BY
 				a.room_start_time
-		
- 		]]>		                     
+
+ 		]]>
 	</select>
-	   
-	
-	<insert id="addRoom" parameterType="Room"> 
-        insert into ROOM ( ROOM_START_TIME, ROOM_DISTANCE, ROOM_FARE, ROOM_REG_DATE ) 
-        values          ( #{roomStartTime}, #{roomDistance}, #{roomFare}, now()) 
-        <selectKey resultType="int" keyProperty="roomNo"> 
-            SELECT LAST_INSERT_ID() 
-        </selectKey>        
-    </insert> 
-    
-	
+
+
+	<insert id="addRoom" parameterType="Room">
+        insert into ROOM ( ROOM_START_TIME, ROOM_DISTANCE, ROOM_FARE, ROOM_REG_DATE )
+        values          ( #{roomStartTime}, #{roomDistance}, #{roomFare}, now())
+        <selectKey resultType="int" keyProperty="roomNo">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
 	<select id="getRoomInfo" parameterType="int" resultType="Room">
-		select  
+		select
 				ROOM_NO 		as roomNo
 			,	ROOM_START_TIME as roomStartTime
 			,	ROOM_DISTANCE 	as roomDistance
 			,	ROOM_FARE 		as roomFare
 			,	ROOM_REG_DATE 	as roomRegDate
-		from  
+		from
 				ROOM
 		where  	1 = 1
 			and	ROOM_NO = #{value}
-	</select>	
-	
+	</select>
+
 	<select id="getMyRoom" parameterType="string" resultMap="roomResultMap">
-		select  
+		select
 				a.room_no
 			,	a.room_start_time
 		    ,   a.room_distance
 	        ,	a.room_fare
 	        ,	a.room_reg_date
-	        ,	(select count(x.mbr_id) from ROOM_MBR x 
+	        ,	(select count(x.mbr_id) from ROOM_MBR x
 		            where x.room_no = a.room_no)     AS roomMbrCount
-		from  
+		from
 				ROOM a, ROOM_MBR b
 		where  	1 = 1
 			and	a.ROOM_NO = b.ROOM_NO
@@ -135,8 +152,8 @@
 		order by
 				a.ROOM_START_TIME
 		limit 1
-	</select>	
-	
+	</select>
+
 </mapper>
 
 

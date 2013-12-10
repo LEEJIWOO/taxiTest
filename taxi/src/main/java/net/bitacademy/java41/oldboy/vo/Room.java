@@ -16,10 +16,19 @@ public class Room implements Serializable {
 	protected int 				roomDistance;
 	protected long 				roomFare;
 	protected Date				roomRegDate;
-	protected int					roomMbrCount;
+	protected int				roomMbrCount;
+	protected int				differenceTime;
 	protected List<RoomMbr>	roomMbrList;
 	protected List<RoomPath> roomPathList;
-	
+
+
+	public int getDifferenceTime() {
+		return differenceTime;
+	}
+	public Room setDifferenceTime(int differenceTime) {
+		this.differenceTime = differenceTime;
+		return this;
+	}
 	public int getRoomNo() {
 		return roomNo;
 	}
@@ -78,7 +87,7 @@ public class Room implements Serializable {
 		this.roomPathList = roomPathList;
 		return this;
 	}
-	
-	
+
+
 }
 

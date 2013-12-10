@@ -17,6 +17,9 @@
 	<listener>
 		<listener-class>net.bitacademy.java41.oldboy.listeners.WebAppListener</listener-class>
 	</listener>
+	<listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 
 	<!-- 필터 선언 -->
 	<filter>

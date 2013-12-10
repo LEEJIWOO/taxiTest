@@ -14,4 +14,6 @@ public interface RoomDao {
 
 	Room getMyRoom(String mbrId) throws Exception ;
 
+	List<Room> getStartTimeList(String criteriaTime) throws Exception;
+
 }

@@ -5,7 +5,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd
@@ -13,20 +13,22 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:annotation-config/>
-	
+	<context:component-scan base-package="com.sidratul.belajar.quartz.produk"/>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
+
 	<!-- 자동으로 등록할 컴포넌트가 있는 패키지를 지정한다. -->
 	<context:component-scan base-package="net.bitacademy.java41.oldboy">
 		<context:exclude-filter type="regex" expression="net.bitacademy.java41.oldboy.controls.*"/>
 	</context:component-scan>
-	
-	
+
+
 	<!-- myBatis 객체 준비 -->
 	<!-- property-placeholder에서 경로지정할때 classpath: 를 앞에다 붙여준다 -->
-	<context:property-placeholder 
+	<context:property-placeholder
 			location="classpath:net/bitacademy/java41/oldboy/dao/db.properties"/>
-	
+
+	<context:component-scan base-package="com.hqhp.maven" />
+
 	<bean id="dataSource"
 	        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	    <property name="driverClassName" value="${jdbc.driver}"/>
@@ -34,32 +36,53 @@
 	    <property name="username" value="${jdbc.username}"/>
 		<property name="password" value="${jdbc.password}"/>
 	</bean>
-	
-	<bean id="transactionManager" 
+
+	<bean id="transactionManager"
 			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
   		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<bean id="sqlSessionFactory" 
+
+	<bean id="sqlSessionFactory"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" 
+		<property name="typeAliasesPackage"
 	  			value="net.bitacademy.java41.oldboy.vo" />
-		<property name="mapperLocations" 
+		<property name="mapperLocations"
 				value="classpath*:net/bitacademy/java41/oldboy/dao/mysql/*Mapper.xml" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="net.bitacademy.java41.oldboy.dao" />
 	</bean>
-	
+
+	<bean id="gcmService" class="net.bitacademy.java41.oldboy.services.GcmServiceImpl" />
+
+	 <bean name="jobQuartz" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="net.bitacademy.java41.oldboy.util.gcm.JobQuartz" />
+		<property name="Durability" value="true" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="timeout" value="30" />
+				<entry key ="gcmService" value-ref="gcmService"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="jobQuartz" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="900000" />
+<!-- 		<property name="repeatInterval" value="60000" /> -->
+	</bean>
+
+	<bean id='testScheduler' class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTrigger" />
+			</list>
+		</property>
+	</bean>
+
+<!-- 	<import resource=""/> -->
 </beans>
-
-
-
-
-
-
-
-
 
